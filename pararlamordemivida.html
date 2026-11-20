@@ -1,0 +1,454 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- CONFIGURACIÓN PARA YOUTUBE -->
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
+<title>Para mi niña 💗</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg,#d9efff,#fce4f2,#e5dcff);
+    font-family: Georgia,serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 12px 250px;
+    overflow-x: hidden;
+}
+
+/* FONDO */
+
+.fondo {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.particula {
+    position: absolute;
+    font-size: 23px;
+    animation: flotar 7s infinite ease-in-out;
+}
+
+@keyframes flotar {
+    0%,100% {
+        transform: translateY(0) rotate(0);
+    }
+
+    50% {
+        transform: translateY(-30px) rotate(20deg);
+    }
+}
+
+/* CONTENEDOR */
+
+.contenedor {
+    width: min(100%,440px);
+    perspective: 1200px;
+    z-index: 2;
+}
+
+/* SOBRE */
+
+.sobre {
+    width: 100%;
+    min-height: 310px;
+    position: relative;
+    background: #a8d9f7;
+    border-radius: 12px;
+    box-shadow: 0 15px 35px #789bb866;
+    overflow: hidden;
+}
+
+.portada {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(145deg,#b9e2fa,#8fc9f0);
+    z-index: 3;
+    border: 3px solid #d9f0ff;
+    border-radius: 12px;
+    transition: transform 1s, opacity .8s;
+    transform-origin: top;
+}
+
+.rosa {
+    position: absolute;
+    font-size: 42px;
+    filter: hue-rotate(155deg) saturate(1.5);
+}
+
+.r1 {top:12px;left:12px;}
+.r2 {top:12px;right:12px;}
+.r3 {bottom:12px;left:12px;}
+.r4 {bottom:12px;right:12px;}
+
+.corazon {
+    font-size: 65px;
+    animation: latido 1.5s infinite;
+}
+
+@keyframes latido {
+    0%,100% {transform:scale(1);}
+    50% {transform:scale(1.12);}
+}
+
+.portada h2 {
+    color:white;
+    font-size:25px;
+    text-shadow:1px 2px 4px #799bb7;
+    margin:10px;
+}
+
+.portada p {
+    color:white;
+    font-size:15px;
+}
+
+/* BOTONES */
+
+button {
+    border:none;
+    padding:12px 23px;
+    background:#f18dbd;
+    color:white;
+    border-radius:30px;
+    font-size:14px;
+    font-family:Georgia,serif;
+    cursor:pointer;
+    box-shadow:0 5px 12px #0002;
+    transition:.3s;
+}
+
+button:hover {
+    background:#e978ac;
+    transform:scale(1.05);
+}
+
+/* CARTA */
+
+.carta {
+    display:none;
+    background:#fffafd;
+    padding:35px 23px;
+    border:3px solid #f5c5dd;
+    border-radius:12px;
+    position:relative;
+    box-shadow:0 15px 35px #0002;
+    animation:aparecer 1s ease;
+    overflow:hidden;
+}
+
+@keyframes aparecer {
+    from {
+        opacity:0;
+        transform:translateY(25px) scale(.95);
+    }
+
+    to {
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+.carta::before {
+    content:"🌸";
+    position:absolute;
+    top:8px;
+    left:8px;
+    font-size:30px;
+}
+
+.carta::after {
+    content:"🌸";
+    position:absolute;
+    top:8px;
+    right:8px;
+    font-size:30px;
+}
+
+.esquina {
+    position:absolute;
+    font-size:30px;
+}
+
+.abajo-izq {
+    bottom:8px;
+    left:8px;
+}
+
+.abajo-der {
+    bottom:8px;
+    right:8px;
+}
+
+.titulo {
+    text-align:center;
+    color:#df83b1;
+    font-size:25px;
+    margin:20px 0;
+}
+
+.contenido {
+    color:#76536a;
+    line-height:1.9;
+    font-size:16px;
+    white-space:pre-wrap;
+    text-align:left;
+}
+
+.foto {
+    display:block;
+    width:85%;
+    max-height:300px;
+    object-fit:cover;
+    margin:20px auto;
+    border-radius:15px;
+    border:4px solid #f5c5dd;
+    box-shadow:0 5px 15px #e9b4d455;
+}
+
+.final {
+    text-align:center;
+    color:#df83b1;
+    font-size:20px;
+    margin-top:25px;
+}
+
+.cerrar {
+    display:block;
+    margin:25px auto 0;
+}
+
+/* REPRODUCTOR */
+
+.reproductor-musica {
+    position:fixed;
+    bottom:12px;
+    right:12px;
+    z-index:100;
+    width:225px;
+    background:#fff0f7;
+    border:2px solid #f5c5dd;
+    border-radius:18px;
+    padding:10px;
+    text-align:center;
+    box-shadow:0 4px 15px #0002;
+}
+
+.reproductor-musica iframe {
+    display:block;
+    width:200px;
+    height:200px;
+    border-radius:10px;
+    margin:auto;
+}
+
+.reproductor-musica p {
+    color:#bd7199;
+    margin:8px 0 2px;
+    font-size:13px;
+}
+
+@media(max-width:400px) {
+    .contenido {
+        font-size:15px;
+    }
+
+    .carta {
+        padding:32px 18px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- DECORACIONES -->
+
+<div class="fondo">
+
+    <span class="particula" style="top:10%;left:10%">🌸</span>
+    <span class="particula" style="top:20%;right:12%">💗</span>
+    <span class="particula" style="top:75%;left:15%">🌸</span>
+    <span class="particula" style="top:80%;right:10%">✨</span>
+    <span class="particula" style="top:45%;right:5%">🌷</span>
+    <span class="particula" style="top:55%;left:5%">🌸</span>
+    <span class="particula" style="top:35%;left:80%">💗</span>
+
+</div>
+
+<div class="contenedor">
+
+    <!-- PORTADA -->
+
+    <div class="sobre" id="sobre">
+
+        <div class="portada" id="portada">
+
+            <span class="rosa r1">🌹</span>
+            <span class="rosa r2">🌹</span>
+            <span class="rosa r3">🌹</span>
+            <span class="rosa r4">🌹</span>
+
+            <div class="corazon">💗</div>
+
+            <h2>Para mi niña</h2>
+
+            <p>Una cartita hecha con amor 🌸</p>
+
+            <button onclick="abrirCarta()">
+                Abrir carta 💌
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- INTERIOR DE LA CARTA -->
+
+    <div class="carta" id="carta">
+
+        <span class="esquina abajo-izq">🌸</span>
+        <span class="esquina abajo-der">🌸</span>
+
+        <h2 class="titulo">
+            Para vos, mi amor 💗
+        </h2>
+
+        <!-- PRIMERA IMAGEN -->
+
+        <img
+            class="foto"
+            src="https://placehold.co/600x400/f8d9e9/ba719c?text=Nuestra+foto+1"
+            alt="Nuestra fotografía"
+        >
+
+        <!-- TEXTO -->
+
+        <div class="contenido">
+Quiero que sepas lo especial que sos para mí.
+
+Acá podés escribir todo lo que quieras expresarle, tus sentimientos, recuerdos, momentos favoritos y todos esos pequeños detalles que hacen que tu historia juntos sea tan bonita.
+
+Podés escribir tantos párrafos como quieras. La carta se adaptará al tamaño del texto.
+
+Te amo muchísimo y espero que cada palabra te recuerde lo importante que sos para mí. 💗
+        </div>
+
+        <!-- SEGUNDA IMAGEN -->
+
+        <img
+            class="foto"
+            src="https://placehold.co/600x400/f8d9e9/ba719c?text=Nuestra+foto+2"
+            alt="Nuestra segunda fotografía"
+        >
+
+        <div class="final">
+
+            Con muchísimo amor, para siempre. 🌷
+
+            <p>Te amo 💗</p>
+
+        </div>
+
+        <button class="cerrar" onclick="cerrarCarta()">
+            Cerrar sobre 💌
+        </button>
+
+    </div>
+
+</div>
+
+<!-- MÚSICA DE YOUTUBE -->
+
+<div class="reproductor-musica">
+
+    <iframe
+        id="miMusica"
+        width="200"
+        height="200"
+        src="https://www.youtube.com/embed/OzIkzJFuXGc?playsinline=1&loop=1&playlist=OzIkzJFuXGc"
+        title="Nuestra canción 💗"
+        frameborder="0"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+    </iframe>
+
+    <p>🎵 Nuestra canción 💗</p>
+
+</div>
+
+<!-- FUNCIONES -->
+
+<script>
+
+function abrirCarta() {
+
+    const portada = document.getElementById("portada");
+    const sobre = document.getElementById("sobre");
+    const carta = document.getElementById("carta");
+
+    portada.style.transform = "rotateX(180deg)";
+    portada.style.opacity = "0";
+
+    setTimeout(() => {
+
+        sobre.style.display = "none";
+        carta.style.display = "block";
+
+        window.scrollTo({
+            top:0,
+            behavior:"smooth"
+        });
+
+    },850);
+
+}
+
+function cerrarCarta() {
+
+    const portada = document.getElementById("portada");
+    const sobre = document.getElementById("sobre");
+    const carta = document.getElementById("carta");
+
+    carta.style.display = "none";
+    sobre.style.display = "block";
+
+    setTimeout(() => {
+
+        portada.style.transform = "rotateX(0deg)";
+        portada.style.opacity = "1";
+
+    },50);
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+</script>
+
+</body>
+</html>
